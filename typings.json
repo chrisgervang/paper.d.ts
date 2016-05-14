@@ -1,4 +1,5 @@
 {
   "name": "paper.js",
-  "main": "paper.d.ts"
+  "main": "./paper.d.ts",
+  "ambient": true
 }
