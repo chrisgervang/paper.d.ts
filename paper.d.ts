@@ -6,12 +6,12 @@ declare namespace __paperjs {
     /**
      * The version of Paper.js, as a string.
      */
-    export var version: string;
+    var version: string;
 
     /**
     * Gives access to paper's configurable settings.
     */
-    export var settings: {
+    var settings: {
 
       applyMatrix: boolean;
       handleSize: number;
@@ -22,53 +22,53 @@ declare namespace __paperjs {
     /**
      * The currently active project.
      */
-    export var project: Project;
+    var project: Project;
 
     /**
      * The list of all open projects within the current Paper.js context.
      */
-    export var projects: Project[];
+    var projects: Project[];
 
     /**
      * The reference to the active project's view.
      * Read Only.
      */
-    export var view: View;
+    var view: View;
 
     /**
      * The reference to the active tool.
      */
-    export var tool: Tool;
+    var tool: Tool;
 
     /**
      * The list of available tools.
      */
-    export var tools: Tool[];
+    var tools: Tool[];
 
     /**
      * Injects the paper scope into any other given scope. Can be used for examle to inject the currently active PaperScope into the window's global scope, to emulate PaperScript-style globally accessible Paper classes and objects
      * Please note: Using this method may override native constructors (e.g. Path, RGBColor). This may cause problems when using Paper.js in conjunction with other libraries that rely on these constructors. Keep the library scoped if you encounter issues caused by this.
      * @param scope -
      */
-    export function install(scope: any): void;
+    function install(scope: any): void;
 
     /**
      * Sets up an empty project for us. If a canvas is provided, it also creates a View for it, both linked to this scope.
      * @param element - the HTML canvas element this scope should be associated with, or an ID string by which to find the element.
      */
-    export function setup(canvas: HTMLCanvasElement | string): void;
+    function setup(canvas: HTMLCanvasElement | string): void;
 
     /**
      * Activates this PaperScope, so all newly created items will be placed in its active project.
      */
-    export function activate(): void;
+    function activate(): void;
 
     /**
      * An affine transform performs a linear mapping from 2D coordinates to other 2D coordinates that preserves the "straightness" and "parallelness" of lines.
      * Such a coordinate transformation can be represented by a 3 row by 3 column matrix with an implied last row of [ 0 0 1 ]. This matrix transforms source coordinates (x,y) into destination coordinates (x',y') by considering them to be a column vector and multiplying the coordinate vector by the matrix according to the following process:
      * This class is optimized for speed and minimizes calculations based on its knowledge of the underlying matrix (as opposed to say simply performing matrix multiplication).
      */
-    export class Matrix {
+    class Matrix {
 
       /**
        * Creates a 2D affine transform.
@@ -319,7 +319,7 @@ declare namespace __paperjs {
     /**
      * The Point object represents a point in the two dimensional space of the Paper.js project. It is also used to represent two dimensional vector objects.
      */
-    export class Point {
+    class Point {
 
       /**
        * Returns a new point object with the smallest x and y of the supplied points.
@@ -596,7 +596,7 @@ declare namespace __paperjs {
     /**
      * A Rectangle specifies an area that is enclosed by it's top-left point (x, y), its width, and its height. It should not be confused with a rectangular path, it is not an item.
      */
-    export class Rectangle {
+    class Rectangle {
 
       /**
        * Creates a Rectangle object.
@@ -829,7 +829,7 @@ declare namespace __paperjs {
     /**
      * The Size object is used to describe the size or dimensions of something, through its width and height properties.
      */
-    export class Size {
+    class Size {
 
       /**
        * Returns a new size object with the smallest width and height of the supplied sizes.
@@ -937,7 +937,7 @@ declare namespace __paperjs {
       abs(): Size;
 
     }
-    export interface IFrameEvent {
+    interface IFrameEvent {
 
       /**
        * the number of times the frame event was fired.
@@ -961,7 +961,7 @@ declare namespace __paperjs {
      * Paper classes can only be accessed through PaperScope objects. Thus in PaperScript they are global, while in JavaScript, they are available on the global paper object. For JavaScript you can use paperScope.install(scope) to install the Paper classes and objects on the global scope. Note that when working with more than one scope, this still works for classes, but not for objects like paperScope.project, since they are not updated in the injected scope if scopes are switched.
      * The global paper object is simply a reference to the currently active PaperScope.
      */
-    export class PaperScope {
+    class PaperScope {
 
       /**
        * The version of Paper.js, as a string.
@@ -1033,7 +1033,7 @@ declare namespace __paperjs {
     /**
      * The Item type allows you to access and modify the items in Paper.js projects. Its functionality is inherited by different project item types such as Path, CompoundPath, Group, Layer and Raster. They each add a layer of functionality that is unique to their type, but share the underlying properties and functions that they inherit from Item.
      */
-    export class Item {
+    class Item {
 
       /**
        * The tangential vector to the #curve at the given location.
@@ -1420,7 +1420,7 @@ declare namespace __paperjs {
 
       /**
        * Exports the project with all its layers and child items as an SVG DOM, all contained in one top level SVG group node.
-       * @param options [optional] the export options, default: { asString: false, precision: 5, matchShapes: false }
+       * @param options [optional] the options, default: { asString: false, precision: 5, matchShapes: false }
        * @param options.asString - whether a SVG node or a String is to be returned.
        * @param options.precision - the amount of fractional digits in numbers used in SVG data.
        * @param options.matchShapes - whether path items should tried to be converted to shape items, if their geometries can be made to match
@@ -1799,7 +1799,7 @@ declare namespace __paperjs {
     /**
      * A Group is a collection of items. When you transform a Group, its children are treated as a single unit without changing their relative positions.
      */
-    export class Group extends Item {
+    class Group extends Item {
 
       /**
        * Creates a new Group item and places it at the top of the active layer.
@@ -1825,7 +1825,7 @@ declare namespace __paperjs {
      * The layer which is currently active can be accessed through project.activeLayer.
      * An array of all layers in a project can be accessed through project.layers.
      */
-    export class Layer extends Group {
+    class Layer extends Group {
 
       /**
        * Creates a new Layer item and places it at the end of the project.layers array. The newly created layer will be activated, so all newly created items will be placed within it.
@@ -1844,7 +1844,7 @@ declare namespace __paperjs {
       activate(): void;
 
     }
-    export class Shape extends Item {
+    class Shape extends Item {
 
       /**
        * Creates a circular shape item.
@@ -1917,7 +1917,7 @@ declare namespace __paperjs {
     /**
      * The Raster item represents an image in a Paper.js project.
      */
-    export class Raster extends Item {
+    class Raster extends Item {
 
       /**
        * Creates a new raster item from the passed argument, and places it in the active layer. object can either be a DOM Image, a Canvas, or a string describing the URL to load the image from, or the ID of a DOM element to get the image from (either a DOM Image or a Canvas).
@@ -2049,7 +2049,7 @@ declare namespace __paperjs {
     /**
      * A PlacedSymbol represents an instance of a symbol which has been placed in a Paper.js project.
      */
-    export class PlacedSymbol extends Item {
+    class PlacedSymbol extends Item {
 
       /**
        * Creates a new PlacedSymbol Item.
@@ -2067,7 +2067,7 @@ declare namespace __paperjs {
     /**
      * A HitResult object contains information about the results of a hit test. It is returned by item.hitTest(point) and project.hitTest(point).
      */
-    export class HitResult {
+    class HitResult {
 
       /**
        * Describes the type of the hit result. For example, if you hit a segment point, the type would be 'segment'.
@@ -2110,7 +2110,7 @@ declare namespace __paperjs {
     /**
      * The PathItem class is the base for any items that describe paths and offer standardised methods for drawing and path manipulation, such as Path and CompoundPath.
      */
-    export class PathItem extends Item {
+    class PathItem extends Item {
 
       /**
        * The path's geometry, formatted as SVG style path data.
@@ -2267,7 +2267,7 @@ declare namespace __paperjs {
     /**
      * The path item represents a path in a Paper.js project.
      */
-    export class Path extends PathItem {
+    class Path extends PathItem {
 
       /**
        * Creates a linear path item from two points describing a line.
@@ -2619,7 +2619,7 @@ declare namespace __paperjs {
     /**
      * A compound path contains two or more paths, holes are drawn where the paths overlap. All the paths in a compound path take on the style of the backmost path and can be accessed through its item.children list.
      */
-    export class CompoundPath extends PathItem {
+    class CompoundPath extends PathItem {
 
       /**
        * Creates a new compound path item from an object description and places it at the top of the active layer.
@@ -2684,7 +2684,7 @@ declare namespace __paperjs {
      * The Segment object represents the points of a path through which its Curve objects pass. The segments of a path can be accessed through its path.segments array.
      * Each segment consists of an anchor point (segment.point) and optionaly an incoming and an outgoing handle (segment.handleIn and segment.handleOut), describing the tangents of the two Curve objects that are connected by this segment.
      */
-    export class Segment {
+    class Segment {
 
       /**
        * Creates a new Segment object.
@@ -2798,7 +2798,7 @@ declare namespace __paperjs {
      * The Curve object represents the parts of a path that are connected by two following Segment objects. The curves of a path can be accessed through its path.curves array.
      * While a segment describe the anchor point and its incoming and outgoing handles, a Curve object describes the curve passing between two such segments. Curves and segments represent two different ways of looking at the same thing, but focusing on different aspects. Curves for example offer many convenient ways to work with parts of the path, finding lengths, positions or tangents at given offsets.
      */
-    export class Curve {
+    class Curve {
 
       /**
        * Creates a new curve object.
@@ -3008,7 +3008,7 @@ declare namespace __paperjs {
      * CurveLocation objects describe a location on Curve objects, as defined by the curve parameter, a value between 0 (beginning of the curve) and 1 (end of the curve). If the curve is part of a Path item, its index inside the path.curves array is also provided.
      * The class is in use in many places, such as path.getLocationAt(offset, isParameter), path.getLocationOf(point), Path#getNearestLocation(point),{@linkPathItem#getIntersections(path), etc.
      */
-    export class CurveLocation {
+    class CurveLocation {
 
       /**
        * Creates a new CurveLocation object.
@@ -3096,7 +3096,7 @@ declare namespace __paperjs {
      * The currently active project can be accessed through the paperScope.project variable.
      * An array of all open projects is accessible through the paperScope.projects variable.
      */
-    export class Project {
+    class Project {
 
       /**
        * Creates a Paper.js project containing one empty Layer, referenced by project.activeLayer.
@@ -3215,7 +3215,7 @@ declare namespace __paperjs {
 
       /**
        * Exports the project with all its layers and child items as an SVG DOM, all contained in one top level SVG group node.
-       * @param options [optional] the export options, default: { asString: false, precision: 5, matchShapes: false }
+       * @param options [optional] the options, default: { asString: false, precision: 5, matchShapes: false }
        * @param options.asString - whether a SVG node or a String is to be returned.
        * @param options.precision - the amount of fractional digits in numbers used in SVG data.
        * @param options.matchShapes - whether path items should tried to be converted to shape items, if their geometries can be made to match
@@ -3235,7 +3235,7 @@ declare namespace __paperjs {
     /**
      * Symbols allow you to place multiple instances of an item in your project. This can save memory, since all instances of a symbol simply refer to the original item and it can speed up moving around complex objects, since internal properties such as segment lists and gradient positions don't need to be updated with every transformation.
      */
-    export class Symbol {
+    class Symbol {
 
       /**
        * Creates a Symbol item.
@@ -3272,7 +3272,7 @@ declare namespace __paperjs {
      * All properties of Style are also reflected directly in Item, i.e.: item.fillColor.
      * To set multiple style properties in one go, you can pass an object to item.style. This is a convenient way to define a style once and apply it to a series of items:
      */
-    export class Style {
+    class Style {
 
       /**
        * The view that this style belongs to.
@@ -3373,7 +3373,7 @@ declare namespace __paperjs {
       justification: string;
 
     }
-    export interface IHSBColor {
+    interface IHSBColor {
 
       /**
        * the hue of the color as a value in degrees between 0 and 360
@@ -3393,7 +3393,7 @@ declare namespace __paperjs {
       alpha?: number;
 
     }
-    export interface IHSLColor {
+    interface IHSLColor {
 
       /**
        * the hue of the color as a value in degrees between 0 and 360
@@ -3413,7 +3413,7 @@ declare namespace __paperjs {
       alpha?: number;
 
     }
-    export interface IGradientColor {
+    interface IGradientColor {
       /**
        * the gradient object that describes the color stops and type of gradient to be used.
        */
@@ -3434,7 +3434,7 @@ declare namespace __paperjs {
     /**
      * All properties and functions that expect color values in the form of instances of Color objects, also accept named colors and hex values as strings which are then converted to instances of Color internally.
      */
-    export class Color {
+    class Color {
 
       /**
        * Creates a RGB Color object.
@@ -3579,7 +3579,7 @@ declare namespace __paperjs {
     /**
      * The Gradient object.
      */
-    export class Gradient {
+    class Gradient {
 
       /**
        * The gradient stops on the gradient ramp.
@@ -3606,7 +3606,7 @@ declare namespace __paperjs {
     /**
      * The GradientStop object.
      */
-    export class GradientStop {
+    class GradientStop {
 
       /**
        * Creates a GradientStop object.
@@ -3634,7 +3634,7 @@ declare namespace __paperjs {
     /**
      * The View object wraps an HTML element and handles drawing and user interaction through mouse and keyboard for it. It offer means to scroll the view, find the currently visible bounds in project coordinates, or the center, both useful for constructing artwork that should appear centered on screen.
      */
-    export class View {
+    class View {
 
       /**
        * The underlying native element.
@@ -3782,7 +3782,7 @@ declare namespace __paperjs {
      * The Tool object refers to a script that the user can interact with by using the mouse and keyboard and can be accessed through the global tool variable. All its properties are also available in the paper scope.
      * The global tool variable only exists in scripts that contain mouse handler functions (onMouseMove, onMouseDown, onMouseDrag, onMouseUp) or a keyboard handler function (onKeyDown, onKeyUp).
      */
-    export class Tool {
+    class Tool {
 
       /**
        * The minimum distance the mouse has to drag before firing the onMouseDrag event, since the last onMouseDrag event.
@@ -3885,7 +3885,7 @@ declare namespace __paperjs {
       responds(type: string): boolean;
 
     }
-    export class Event {
+    class Event {
 
       /**
        * Read Only
@@ -3896,7 +3896,7 @@ declare namespace __paperjs {
     /**
      * ToolEvent The ToolEvent object is received by the Tool's mouse event handlers tool.onMouseDown, tool.onMouseDrag, tool.onMouseMove and tool.onMouseUp. The ToolEvent object is the only parameter passed to these functions and contains information about the mouse event.
      */
-    export class ToolEvent extends Event {
+    class ToolEvent extends Event {
 
       /**
        * The type of tool event.
@@ -3945,7 +3945,7 @@ declare namespace __paperjs {
       toString(): string;
 
     }
-    export class Key {
+    class Key {
 
       /**
        * Checks whether the specified key is pressed.
@@ -3957,7 +3957,7 @@ declare namespace __paperjs {
     /**
      * The KeyEvent object is received by the Tool's keyboard handlers tool.onKeyDown, tool.onKeyUp. The KeyEvent object is the only parameter passed to these functions and contains information about the keyboard event.
      */
-    export class KeyEvent extends Event {
+    class KeyEvent extends Event {
 
       /**
        * The type of key event.
@@ -3984,7 +3984,7 @@ declare namespace __paperjs {
     /**
      * The TextItem type allows you to create typography. Its functionality is inherited by different text item types such as PointText, and AreaText (coming soon). They each add a layer of functionality that is unique to their type, but share the underlying properties and functions that they inherit from TextItem.
      */
-    export class TextItem extends Item {
+    class TextItem extends Item {
 
       /**
        * The text contents of the text item.
@@ -4021,7 +4021,7 @@ declare namespace __paperjs {
     /**
      * A PointText item represents a piece of typography in your Paper.js project which starts from a certain point and extends by the amount of characters contained in it.
      */
-    export class PointText extends TextItem {
+    class PointText extends TextItem {
 
       /**
        * Creates a point text item
