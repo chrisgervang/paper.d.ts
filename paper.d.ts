@@ -474,7 +474,51 @@ declare module "paper" {
        * @param matrix -
        */
       transform(matrix: Matrix): Point;
-
+      
+      /**
+       * Returns the addition of the supplied value to both coordinates of
+       * the point as a new point.
+       * The object itself is not modified!
+       * @param point - the point or number to add
+       */
+      add(point: Point | Number): Point;
+      
+      /**
+       * Returns the subtraction of the supplied value to both coordinates of
+       * the point as a new point.
+       * The object itself is not modified!
+       * @param point - the point or number to subtract
+       */
+      subtract(point: Point | Number): Point;
+      
+      /**
+       * Returns the multiplication of the supplied value to both coordinates of
+       * the point as a new point.
+       * The object itself is not modified!
+       * @param point - the point or number to multiply by
+       */
+      multiply(point: Point | Number): Point;
+      
+      /**
+       * Returns the division of the supplied value to both coordinates of
+       * the point as a new point.
+       * The object itself is not modified!
+       * @param point - the point or number to divide by
+       */
+      divide(point: Point | Number): Point;
+      
+      /**
+       * The modulo operator returns the integer remainders of dividing the point
+       * by the supplied value as a new point.
+       * @param point - 
+       */
+      modulo(point: Point | Number): Point;
+      
+      /**
+       * The negate operator returns the negative of the point.
+       */
+      negate(): Point;
+      
       /**
        * Checks whether the point is inside the boundaries of the rectangle.
        * @param rect - the rectangle to check against
